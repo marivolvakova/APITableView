@@ -19,7 +19,7 @@ class DetailedViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        name.text = card?.name
-        type.text = card?.type
+        name.text = "\(String(describing: card?.name ?? "No data"))".uppercased()
+        //type.text = card?.type
     }
 }
