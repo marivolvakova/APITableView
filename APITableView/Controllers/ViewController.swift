@@ -11,19 +11,20 @@ import Alamofire
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var activityIndicatorViewController: UIActivityIndicatorView!
+    
     var cards = [Card]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchCard()
-        
         title = "Cards list"
         
-//        tableView.backgroundColor = UIColor(named: "separftors")
-//        tableView.rowHeight = 50
         
-        view.backgroundColor = UIColor(named: "backgroundColor")
+        activityIndicatorViewController?.startAnimating()
+        activityIndicatorViewController?.isHidden = false
+        
+        fetchCard()
     }
 }
 
@@ -48,7 +49,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         performSegue(withIdentifier: "showDetails", sender: self)
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,6 +70,9 @@ extension ViewController {
             self.cards = cards
 
             tableView?.reloadData()
+            
+            activityIndicatorViewController?.stopAnimating()
+            activityIndicatorViewController?.isHidden = true
         }
     }
 }
