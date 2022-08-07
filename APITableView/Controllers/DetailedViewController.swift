@@ -11,25 +11,22 @@ import Kingfisher
 
 
 
-class DetailedViewController: ViewController {
+class DetailedViewController: UIViewController {
     
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var type: UILabel!
-    
     @IBOutlet weak var manaCost: UILabel!
     @IBOutlet weak var setName: UILabel!
     @IBOutlet weak var cmc: UILabel!
     @IBOutlet weak var rarity: UILabel!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var textInCard: UILabel!
-    
-    
+    @IBOutlet weak var imageLabel: UILabel!
     @IBOutlet weak var activityIndicatorDetailed: UIActivityIndicatorView!
-    
-    
-    
+
     @IBOutlet weak var imageView: UIImageView!
+    
     var card: Card?
     
     override func viewDidLoad() {
@@ -47,14 +44,20 @@ class DetailedViewController: ViewController {
         artist.text = "Artist: \(String(describing: card?.artist ?? "No data"))"
         textInCard.text = "Text: \(String(describing: card?.text ?? "No data"))"
         
-        let url = URL(string: card?.imageUrl ?? "http://cdn.sstatic.net/Sites/stackoverflow/company/Img/photos/big/6.jpg?v=f4b7c5fee820")
         
+            
+        guard let pic = card?.imageUrl else {
+            activityIndicatorDetailed.stopAnimating()
+            activityIndicatorDetailed.isHidden = true
+            imageLabel.text = "No card picture"
+            return
+        }
         
+        guard let url = URL(string: pic) else { return }
+            
+        downloadImage(from: url)
         
-        imageView.kf.setImage(with: url)
-        
-        
-        
+
     }
     
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -70,8 +73,8 @@ class DetailedViewController: ViewController {
             DispatchQueue.main.async() { [weak self] in
                 self?.imageView.image = UIImage(data: data)
                 
-//                self?.activityIndicatorDetailed.stopAnimating()
-//                self?.activityIndicatorDetailed.isHidden = true
+                self?.activityIndicatorDetailed.stopAnimating()
+                self?.activityIndicatorDetailed.isHidden = true
                
             }
         }
