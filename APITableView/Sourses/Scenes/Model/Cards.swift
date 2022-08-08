@@ -13,13 +13,13 @@ struct Cards: Decodable {
 }
 
 struct Card: Decodable {
+    let cmc: Int?
     let name: String
+    let text: String?
+    let type: String?
+    let rarity: String?
+    let artist: String?
     let setName: String?
     let imageUrl: String?
     let manaCost: String?
-    let cmc: Int?
-    let type: String?
-    let rarity: String?
-    let text: String?
-    let artist: String?
 }
