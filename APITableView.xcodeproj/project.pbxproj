@@ -139,16 +139,8 @@
 				D6DFBD6028A1375C0012B530 /* AlertExtention.swift */,
 				D6DFBD5E28A137250012B530 /* ParsingDataExtention.swift */,
 				D6DFBD6228A137D40012B530 /* ParsingImageExtention.swift */,
-				D6DFBD5B28A1364E0012B530 /* DetailedControllerExtentions */,
 			);
 			path = Extentions;
-			sourceTree = "<group>";
-		};
-		D6DFBD5B28A1364E0012B530 /* DetailedControllerExtentions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DetailedControllerExtentions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

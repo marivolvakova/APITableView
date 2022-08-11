@@ -42,7 +42,11 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if let destination = segue.destination as? DetailedViewController {
-                destination.card = cards[(tableView.indexPathForSelectedRow?.row)!]
+                if filteredArray.isEmpty {
+                    destination.card = cards[(tableView.indexPathForSelectedRow?.row)!]
+                } else {
+                    destination.card = filteredArray[(tableView.indexPathForSelectedRow?.row)!]
+                }
         }
     }
 }
